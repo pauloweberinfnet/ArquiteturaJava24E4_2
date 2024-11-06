@@ -1,0 +1,4 @@
+licensePlate;archived;odometer;brand;model;year;fuelType;fuelTankCapacity;fuelLevel
+ABC1234;false;45000.5;Toyota;Corolla;2020;Gasoline;50.0;35.5
+XYZ9876;false;12500.0;Honda;Civic;2022;Flex;45.0;40.0
+DEF5678;true;98000.8;Volkswagen;Golf;2019;Diesel;55.0;25.5
