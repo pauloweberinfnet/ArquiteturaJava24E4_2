@@ -1,6 +1,6 @@
 package br.edu.infnet.pauloweber.model.domain;
 
-public class Eletric extends Engine{
+public class Eletric extends Vehicle{
 	private String batteryNominalCapacity;
   private float batteryCurrentCapacity;
   private float batteryHealth;

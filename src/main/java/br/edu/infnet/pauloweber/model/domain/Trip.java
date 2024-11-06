@@ -16,8 +16,22 @@ public class Trip {
     private float endingFuelLevel;
     private float fuelConsumption;
     private float kilometersPerLiter;
+    private Driver driver;
+    private Vehicle vehicle;
 
 
+    public Vehicle getVehicle() {
+      return vehicle;
+    }
+    public void setVehicle(Vehicle vehicle) {
+      this.vehicle = vehicle;
+    }
+    public Driver getDriver() {
+      return driver;
+    }
+    public void setDriver(Driver driver) {
+      this.driver = driver;
+    }
     public float getStartingOdometer() {
       return startingOdometer;
     }

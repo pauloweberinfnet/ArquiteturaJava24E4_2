@@ -1,9 +1,16 @@
 package br.edu.infnet.pauloweber.model.domain;
 
-public class Combustion extends Engine{
+public class Combustion extends Vehicle{
 	private String fuelType;
   private float fuelTankCapacity;
+  private float fuelLevel;
 
+  public float getFuelLevel() {
+    return fuelLevel;
+  }
+  public void setFuelLevel(float fuelLevel) {
+    this.fuelLevel = fuelLevel;
+  }
   public String getFuelType() {
     return fuelType;
   }
