@@ -30,8 +30,12 @@ public class DriverService {
     return (Collection<Driver>) driverRepository.findAll();
   }
 
-  public List<Driver> getByName(String name) {
+  public List<Driver> getByNameContaining(String name) {
     return driverRepository.findByNameContaining(name);
+  }
+
+  public List<Driver> getByLicenseId(String licenseId) {
+    return driverRepository.findByLicenseId(licenseId);
   }
 
   public long count() {

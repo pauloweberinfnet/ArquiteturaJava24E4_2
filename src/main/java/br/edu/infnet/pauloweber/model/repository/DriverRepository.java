@@ -12,4 +12,6 @@ public interface DriverRepository extends CrudRepository<Driver, Integer> {
 
   List<Driver> findByNameContaining(String name);
 
+  List<Driver> findByLicenseId(String licenseId);
+
 }
