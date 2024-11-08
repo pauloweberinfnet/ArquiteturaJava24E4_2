@@ -1,12 +1,31 @@
 package br.edu.infnet.pauloweber.model.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
+@Entity
+@Table(name = "TVehicle", uniqueConstraints = @UniqueConstraint(columnNames = {"licensePlate"}))
 public abstract class Vehicle{
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+
+	@jakarta.persistence.Column(unique = true)
 	private String licensePlate;
 	private boolean archived;
 	private float odometer;
 	private String brand;
 	private String model;
-	private int year;
+	private int modelYear;
+
+	@Override
+	public String toString() {
+		return String.format("Veículo: Placa %s, Marca %s, Modelo %s, Ano %d", licensePlate, brand, model, modelYear);
+	}
 
 	public String getBrand() {
 		return brand;
@@ -20,11 +39,11 @@ public abstract class Vehicle{
 	public void setModel(String model) {
 		this.model = model;
 	}
-	public int getYear() {
-		return year;
+	public int getModelYear() {
+		return modelYear;
 	}
-	public void setYear(int year) {
-		this.year = year;
+	public void setModelYear(int modelYear) {
+		this.modelYear = modelYear;
 	}
 	public float getOdometer() {
 		return odometer;
