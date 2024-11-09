@@ -16,6 +16,7 @@ import br.edu.infnet.pauloweber.model.domain.Eletric;
 import br.edu.infnet.pauloweber.model.domain.Trip;
 import br.edu.infnet.pauloweber.model.service.DriverService;
 import br.edu.infnet.pauloweber.model.service.VehicleService;
+import br.edu.infnet.pauloweber.model.service.TripService;
 
 @Component
 public class Loader implements ApplicationRunner {
@@ -24,6 +25,8 @@ public class Loader implements ApplicationRunner {
   private DriverService driverService;
   @Autowired
   private VehicleService vehicleService;
+  @Autowired
+  private TripService tripService;
 
   @Override
   public void run(ApplicationArguments args) throws Exception {
@@ -111,6 +114,8 @@ public class Loader implements ApplicationRunner {
       combustion.setFuelTankCapacity(Float.parseFloat(fields[7]));
       combustion.setFuelLevel(Float.parseFloat(fields[8]));
 
+      vehicleService.add(combustion);
+
       System.out.println("Veículo a combustão: " + combustion.getLicensePlate() + " - " + combustion.getBrand() + " - " + combustion.getModel());
 
       lineCombustion = combustionData.readLine();
@@ -143,7 +148,18 @@ public class Loader implements ApplicationRunner {
       trip.setEndingFuelLevel(Float.valueOf(fields[5]));
       trip.setFuelConsumption(trip.getStartingFuelLevel(), trip.getEndingFuelLevel());
       trip.setAverageConsumption(trip.getDistance(), trip.getFuelConsumption());
-      // TODO: Setar o veículo e o motorista
+
+      // Setting a random vehicle and driver for the trip
+      trip.setVehicle(vehicleService.getRandomVehicle());
+      trip.setDriver(driverService.getRandomDriver());
+
+      // Correcting the vehicle odometer
+      if (trip.getEndingOdometer() > trip.getVehicle().getOdometer()) {
+        trip.getVehicle().setOdometer(trip.getEndingOdometer());
+      }
+
+      tripService.add(trip);
+
       System.out.println(trip.toString());
 
       lineTrip = tripsData.readLine();
