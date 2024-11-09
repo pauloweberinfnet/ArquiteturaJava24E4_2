@@ -1,5 +1,10 @@
 package br.edu.infnet.pauloweber.model.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TCombustion")
 public class Combustion extends Vehicle{
 	private String fuelType;
   private float fuelTankCapacity;
