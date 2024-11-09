@@ -2,7 +2,6 @@ package br.edu.infnet.pauloweber.model.domain;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -42,7 +41,8 @@ public class Trip {
 
     @Override
     public String toString() {
-      return String.format("Viagem: Distância %.2f km, Duração %s, Velocidade Média %.2f km/h, Consumo médio %.2f", distance, tripDuration, averageSpeed, averageConsumption);
+      final String vehiclePlate = vehicle.getLicensePlate();
+      return String.format("Viagem: Distância %.2f km, Veículo %s, Duração %s, Velocidade Média %.2f km/h, Consumo médio %.2f", distance, vehiclePlate , tripDuration, averageSpeed, averageConsumption);
     }
 
     public Vehicle getVehicle() {
