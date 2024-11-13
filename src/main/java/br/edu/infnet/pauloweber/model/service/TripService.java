@@ -3,10 +3,12 @@ package br.edu.infnet.pauloweber.model.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import br.edu.infnet.pauloweber.model.domain.Trip;
 import br.edu.infnet.pauloweber.model.repository.TripRepository;
 
+@Service
 public class TripService {
   @Autowired
   private TripRepository tripRepository;
