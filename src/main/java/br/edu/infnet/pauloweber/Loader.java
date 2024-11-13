@@ -164,6 +164,8 @@ public class Loader implements ApplicationRunner {
 
       lineTrip = tripsData.readLine();
     }
+    tripsData.close();
+    System.out.println("✅ Viagens carregadas com sucesso!");
 
     // Service Tests
     System.out.println("Testando serviços...");
