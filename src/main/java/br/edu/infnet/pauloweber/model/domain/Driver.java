@@ -15,6 +15,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "TDriver", uniqueConstraints = @UniqueConstraint(columnNames = {"licenseId"}))
@@ -23,8 +25,13 @@ public class Driver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
+	//@NotBlank(message = "A CNH é obrigatória.")
+	//@Size(min = 9, max = 9, message = "A CNH deve ter 9 dígitos.")
 	@Column(unique = true)
 	private String licenseId;
+
+	@NotBlank(message = "O nome é obrigatório.")
+	@Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
 	private String name;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
