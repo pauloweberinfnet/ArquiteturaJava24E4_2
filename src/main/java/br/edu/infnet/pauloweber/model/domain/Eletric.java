@@ -1,10 +1,10 @@
 package br.edu.infnet.pauloweber.model.domain;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "TEletric")
+@DiscriminatorValue("ELETRIC")
 public class Eletric extends Vehicle{
 	private String batteryNominalCapacity;
   private float batteryCurrentCapacity;
