@@ -48,6 +48,14 @@ public class Trip {
       return String.format("Viagem: Distância %.2f km, Veículo %s, Duração %s, Velocidade Média %.2f km/h, Consumo médio %.2f", distance, vehiclePlate , tripDuration, averageSpeed, averageConsumption);
     }
 
+    public Integer getId() {
+      return id;
+    }
+
+    public void setId(Integer id) {
+      this.id = id;
+    }
+
     public Vehicle getVehicle() {
       return vehicle;
     }
