@@ -25,8 +25,8 @@ public class Driver {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	//@NotBlank(message = "A CNH é obrigatória.")
-	//@Size(min = 9, max = 9, message = "A CNH deve ter 9 dígitos.")
+	@NotBlank(message = "A CNH é obrigatória.")
+	@Size(min = 9, max = 9, message = "A CNH deve ter 9 dígitos.")
 	@Column(unique = true)
 	private String licenseId;
 
