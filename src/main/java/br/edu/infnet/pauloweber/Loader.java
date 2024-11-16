@@ -183,7 +183,7 @@ public class Loader implements ApplicationRunner {
       file = new FileReader(fileName);
       reader = new BufferedReader(file);
     } catch (FileNotFoundException e) {
-      System.out.println("Não foi possível encontrar o arquivo: " + fileName);
+      System.out.println("File not found: " + fileName);
     }
     return reader;
   }
