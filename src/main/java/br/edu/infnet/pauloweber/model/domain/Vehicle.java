@@ -17,7 +17,7 @@ import jakarta.persistence.InheritanceType;
 @Entity
 @Table(name = "TVehicle", uniqueConstraints = @UniqueConstraint(columnNames = {"licensePlate"}))
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "vehicle_type")
+@DiscriminatorColumn(name = "vehicleType")
 public abstract class Vehicle{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,10 +44,15 @@ public abstract class Vehicle{
 	@Size(min = 4, max = 4, message = "O ano deve ter 4 dígitos.")
 	private int modelYear;
 
+
 	@Override
 	public String toString() {
 		return String.format("Veículo: Placa %s, Marca %s, Modelo %s, Ano %d", licensePlate, brand, model, modelYear);
 	}
+
+	public String getVehicleType() {
+ 		return this.getClass().getSimpleName();
+ 	}
 
 	public String getBrand() {
 		return brand;
