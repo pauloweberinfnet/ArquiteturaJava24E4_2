@@ -21,6 +21,10 @@ public class TripService {
     tripRepository.deleteById(id);
   }
 
+  public Long count() {
+    return tripRepository.count();
+  }
+
   public Collection<Trip> getAll() {
     return (Collection<Trip>) tripRepository.findAll();
   }
