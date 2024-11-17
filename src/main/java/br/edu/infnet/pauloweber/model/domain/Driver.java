@@ -2,6 +2,7 @@ package br.edu.infnet.pauloweber.model.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
@@ -36,7 +37,7 @@ public class Driver {
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "driverId")
-	@JsonManagedReference
+	@JsonBackReference
 	private List<Trip> trips;
 
 	public List<Trip> getTrips() {
