@@ -49,12 +49,12 @@ public class AppController {
   @GetMapping(value = "/vehicles/combustion")
   public String combustion(Model model) {
     model.addAttribute("vehicles", combustionService.getAll());
-    return "vehicles/combustion";
+    return "vehicles";
   }
   @GetMapping(value = "/vehicles/eletric")
   public String eletric(Model model) {
     model.addAttribute("vehicles", eletricService.getAll());
-    return "vehicles/eletric";
+    return "vehicles";
   }
 
   @GetMapping(value = "/trips")
