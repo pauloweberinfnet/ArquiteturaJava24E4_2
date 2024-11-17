@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <h1 class="mb-4 text-center">Gerenciamento de Frota - Motoristas</h1>
-        <a href="/" class="btn btn-primary mb-3">🠨 Voltar</a>
+        <a href="/" class="btn btn-primary mb-3">🏠 Início</a>
         <table class="table table-striped">
             <thead>
               <th>ID</th>
