@@ -29,6 +29,10 @@ public class TripService {
     return (Collection<Trip>) tripRepository.findAll();
   }
 
+  public Trip getById(Integer id) {
+    return tripRepository.findById(id).orElse(null);
+  }
+
   public Collection<Trip> getAllByDriverId(Integer driverId) {
     return tripRepository.findByDriverId(driverId);
   }
