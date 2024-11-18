@@ -1,0 +1,66 @@
+@startuml
+class Driver {
+  -Integer id
+  -String licenseId
+  -String name
+  +getId(): Integer
+  +setId(Integer): void
+  +getLicenseId(): String
+  +setLicenseId(String): void
+  +getName(): String
+  +setName(String): void
+}
+
+class Trip {
+  -Integer id
+  -float startingOdometer
+  -float endingOdometer
+  -float distance
+  -LocalDateTime startTime
+  -LocalDateTime endTime
+  -Duration tripDuration
+  -float averageSpeed
+  -float startingFuelLevel
+  -float endingFuelLevel
+  -float fuelConsumption
+  -float averageConsumption
+  -Driver driver
+  -Vehicle vehicle
+}
+
+interface DriverRepository {
+  +findByNameContaining(String): List<Driver>
+  +findByLicenseId(String): List<Driver>
+  +findByNameContainingOrLicenseIdContaining(String, String): List<Driver>
+}
+
+interface TripRepository {
+  +findByDriverId(Integer): List<Trip>
+  +findByVehicleId(Integer): List<Trip>
+  +findByDistanceOrAverageSpeedOrAverageConsumptionOrStartingOdometerOrEndingOdometerOrStartingFuelLevelOrEndingFuelLevel(Float, Float, Float, Float, Float, Float, Float): List<Trip>
+}
+
+interface VehicleRepository {
+  +findByLicensePlate(String): Collection<Vehicle>
+  +findByLicensePlateContainingOrBrandContainingOrModelContainingOrModelYearOrOdometerOrArchived(String, String, String, Integer, Float, Boolean): Collection<Vehicle>
+}
+
+class DriverController {
+  -DriverService driverService
+}
+
+class TripController {
+  -TripService tripService
+}
+
+class VehicleController {
+  -VehicleService vehicleService
+}
+
+Driver "1" -- "*" Trip
+Trip "*" -- "1" Vehicle
+DriverController --> DriverRepository
+TripController --> TripRepository
+VehicleController --> VehicleRepository
+
+@enduml
