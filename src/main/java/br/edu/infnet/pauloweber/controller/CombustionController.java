@@ -20,8 +20,8 @@ public class CombustionController {
     private CombustionService combustionService;
 
     @GetMapping
-    public Collection<Combustion> getAll() {
-        return combustionService.getAll();
+    public Collection<Combustion> getAll(String sort) {
+        return combustionService.getAll(sort);
     }
 
     @GetMapping("/count")

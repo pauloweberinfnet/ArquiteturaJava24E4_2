@@ -20,8 +20,8 @@ public class EletricController {
     private EletricService eletricService;
 
     @GetMapping
-    public Collection<Eletric> getAll() {
-        return eletricService.getAll();
+    public Collection<Eletric> getAll(String sort) {
+        return eletricService.getAll(sort);
     }
 
     @GetMapping("/count")
