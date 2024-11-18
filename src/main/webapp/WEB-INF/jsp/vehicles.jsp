@@ -23,8 +23,9 @@
             <th>Bateria (kWh) / Nível Tanque (l)</th>
             <th>Bateria (%) / Capacidade Tanque (l)</th>
           </thead>
-          <tbody>
-            <c:forEach items="${vehicles}" var="vehicle">
+          <tbody id="vehiclesBody">
+            <!-- O código abaixo refere-se ao carregamento via AppController -->
+            <!-- <c:forEach items="${vehicles}" var="vehicle">
               <tr>
                 <td>${vehicle.id}</td>
                 <td>${vehicle.model}</td>
@@ -36,7 +37,7 @@
                 <td>${vehicle.vehicleType == 'Eletric' ? vehicle.batteryCurrentCapacity : vehicle.fuelLevel}</td>
                 <td>${vehicle.vehicleType == 'Eletric' ? vehicle.batteryHealth : vehicle.fuelTankCapacity}</td>
               </tr>
-            </c:forEach>
+            </c:forEach> -->
           </tbody>
         </table>
         <div class="btn-group" role="group" aria-label="Filtrar Veículos">
@@ -45,8 +46,34 @@
         </div>
 
       </div>
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+
+      <script>
+        fetch('/api/vehicles')
+            .then(response => response.json())
+            .then(vehicles => {
+                const vehiclesBody = document.getElementById('vehiclesBody');
+                vehicles.forEach(vehicle => {
+                    const row = document.createElement('tr');
+
+                    batteryCapacityOrFuelType = vehicle.vehicleType == 'Eletric' ? vehicle.batteryNominalCapacity : vehicle.fuelType;
+                    batteryLevelOrFuelLevel = vehicle.vehicleType == 'Eletric' ? vehicle.batteryCurrentCapacity : vehicle.fuelLevel;
+                    batteryHealthOrTankCapacity = vehicle.vehicleType == 'Eletric' ? vehicle.batteryHealth.toLocaleString('pt-BR') : vehicle.fuelTankCapacity;
+
+                    row.innerHTML = '<td>' +  vehicle.id + '</td>' +
+                    '<td>' + vehicle.model + '</td>' +
+                    '<td>' + vehicle.modelYear + '</td>' +
+                    '<td>' + vehicle.licensePlate + '</td>' +
+                    '<td>' + vehicle.vehicleType + '</td>' +
+                    '<td>' + vehicle.odometer.toLocaleString('pt-BR') + '</td>' +
+                    '<td>' + batteryCapacityOrFuelType + '</td>' +
+                    '<td>' + batteryLevelOrFuelLevel.toLocaleString('pt-BR') + '</td>' +
+                    '<td>' + batteryHealthOrTankCapacity.toLocaleString('pt-BR') + '</td>';
+                    console.log(row);
+                    vehiclesBody.appendChild(row);
+                });
+            })
+            .catch(error => console.error('Error loading vehicles:', error));
+    </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

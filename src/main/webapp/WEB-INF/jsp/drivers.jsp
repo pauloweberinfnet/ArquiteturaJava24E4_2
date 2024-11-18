@@ -17,21 +17,34 @@
               <th>Nome</th>
               <th>CNH</th>
             </thead>
-            <tbody>
-              <c:forEach items="${drivers}" var="driver">
+            <tbody id="driversBody">
+              <!-- O código abaixo refere-se ao carregamento via AppController -->
+              <!-- <c:forEach items="${drivers}" var="driver">
                 <tr>
                   <td>${driver.id}</td>
                   <td>${driver.name}</td>
                   <td>${driver.licenseId}</td>
                 </tr>
-              </c:forEach>
+              </c:forEach> -->
             </tbody>
         </table>
 
         </div>
-
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script>
+          fetch('/api/drivers')
+              .then(response => response.json())
+              .then(drivers => {
+                  const driversBody = document.getElementById('driversBody');
+                  drivers.forEach(driver => {
+                      const row = document.createElement('tr');
+                      row.innerHTML = '<td>' +  driver.id + '</td>' +
+                      '<td>' + driver.name + '</td>' +
+                      '<td>' + driver.licenseId + '</td>' ;
+                      driversBody.appendChild(row);
+                  });
+              })
+              .catch(error => console.error('Error loading drivers:', error));
+      </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

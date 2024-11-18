@@ -24,23 +24,42 @@
                     <th>Veículo</th>
                 </tr>
             </thead>
-            <tbody>
-                <c:forEach items="${trips}" var="trip">
+            <tbody id="tripsBody">
+                <!-- O código abaixo refere-se ao carregamento via AppController -->
+                <!-- <c:forEach items="${trips}" var="trip">
                     <tr>
                         <td>${trip.startTime}</td>
                         <td><fmt:formatNumber value="${trip.distance}" type="number" minFractionDigits="2" maxFractionDigits="2" pattern="#,##0.00"/></td>
                         <td>${trip.tripDuration}</td>
-                        <td><fmt:formatNumber value="${trip.fuelConsumption}" type="number" minFractionDigits="2" maxFractionDigits="2" pattern="#,###0.0"/> ${trip.vehicle.vehicleType == 'Eletric' ? 'Wh' : 'l'}</td>
+                        <td><fmt:formatNumber value="${trip.fuelConsumption}" type="number" minFractionDigits="2" maxFractionDigits="2" pattern="#,###0.0"/> ${trip.vehicle.vehicleType == 'Eletric' ? 'kWh' : 'l'}</td>
                         <td>${trip.driver.name}</td>
                         <td>${trip.vehicle.model}/${trip.vehicle.modelYear} - ${trip.vehicle.licensePlate}</td>
                       </tr>
-                </c:forEach>
+                </c:forEach> -->
             </tbody>
         </table>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script>
+    fetch('/api/trips')
+        .then(response => response.json())
+        .then(trips => {
+            const tripsBody = document.getElementById('tripsBody');
+            trips.forEach(trip => {
+                const row = document.createElement('tr');
+                consumptionUnit = trip.vehicle.vehicleType === 'Eletric' ? ' kWh' : ' l';
+                row.innerHTML = '<td>' +  trip.startTime + '</td>' +
+                '<td>' + trip.distance.toLocaleString('pt-BR') + '</td>' +
+                '<td>' + trip.tripDuration + '</td>' +
+                '<td>' + trip.fuelConsumption.toLocaleString('pt-BR') + consumptionUnit + '</td>' +
+                '<td>' + trip.driver.name + '</td>' +
+                '<td>' + trip.vehicle.model + '/' + trip.vehicle.modelYear + ' - ' + trip.vehicle.licensePlate + '</td>';
+                tripsBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error loading trips:', error));
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
