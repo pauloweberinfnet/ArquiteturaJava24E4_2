@@ -13,7 +13,7 @@
 
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-center">
             <div class="list-group mb-3">
-                <a href="/trips" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a href="/trips?sort=distance" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <span class="d-flex align-items-center text-body-emphasis text-decoration-none" style="font-size: 3rem;">🗺️</span>
                     <div class="¨d-flex w-100 justify-content-between">
                         <!--<h5 class="mb-0">Viagens <small class="badge text-bg-primary rounded-pill" id="tripsCount">${tripCount}</small></h5>-->
@@ -21,7 +21,7 @@
                         <p class="mb-0 opacity-75">Listar todas viagens</p>
                     </div>
                 </a>
-                <a href="/drivers" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a href="/drivers?sort=name" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <span class="d-flex align-items-center text-body-emphasis text-decoration-none" style="font-size: 3rem;">🧑</span>
                     <div class="¨d-flex w-100 justify-content-between">
                         <!--<h5 class="mb-0">Motoristas <small class="badge text-bg-primary rounded-pill" id="driversCount">${driverCount}</small></h5> -->
@@ -29,7 +29,7 @@
                         <p class="mb-0 opacity-75">Listar todos motoristas</p>
                     </div>
                 </a>
-                <a href="/vehicles" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a href="/vehicles?sort=odometer" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <span class="d-flex align-items-center text-body-emphasis text-decoration-none" style="font-size: 3rem;">🚙</span>
                     <div class="¨d-flex w-100 justify-content-between">
                         <!--<h5 class="mb-0">Veículos <small class="badge text-bg-primary rounded-pill" id="vehiclesCount">${vehicleCount}</small></h5>-->

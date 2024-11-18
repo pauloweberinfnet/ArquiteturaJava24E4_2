@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.infnet.pauloweber.model.domain.Trip;
@@ -25,9 +26,9 @@ public class TripController {
     private TripService tripService;
 
     @GetMapping
-    public Collection<Trip> getTrips() {
-        return tripService.getAll();
-    }
+    public Collection<Trip> getTrips(@RequestParam(required = false, defaultValue = "id") String sort) {
+    return tripService.getAll(sort);
+}
 
     @GetMapping("/{id}")
     public Trip getTripById(@PathVariable Integer id) {
@@ -45,11 +46,10 @@ public class TripController {
     }
 
     @Operation(summary = "Create a new trip.")
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Trip createTrip(@Valid @RequestBody Trip trip) {
         return tripService.add(trip);
     }
-
     @DeleteMapping("/{id}")
     public void deleteTrip(@PathVariable Integer id) {
         tripService.remove(id);

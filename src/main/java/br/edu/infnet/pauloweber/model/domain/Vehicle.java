@@ -1,5 +1,11 @@
 package br.edu.infnet.pauloweber.model.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -13,6 +19,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.Positive;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @Table(name = "TVehicle", uniqueConstraints = @UniqueConstraint(columnNames = {"licensePlate"}))
@@ -44,6 +51,17 @@ public abstract class Vehicle{
 	@Size(min = 4, max = 4, message = "O ano deve ter 4 dígitos.")
 	private int modelYear;
 
+  /* @OneToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	private List<Trip> trips;
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	} */
 
 	@Override
 	public String toString() {

@@ -1,6 +1,7 @@
 package br.edu.infnet.pauloweber.model.service;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
@@ -29,9 +30,30 @@ public class DriverService {
     driverRepository.deleteById(id);
   }
 
-  public Collection<Driver> getAll() {
+  /* public Collection<Driver> getAll() {
     return (Collection<Driver>) driverRepository.findAll();
-  }
+  } */
+
+  public Collection<Driver> getAll(String sort) {
+    List<Driver> drivers = (List<Driver>) driverRepository.findAll();
+    if (drivers.isEmpty()) {
+        return drivers;
+    }
+    if (sort == null) {
+        return drivers;
+    }
+    switch (sort.toLowerCase()) {
+        case "name":
+            drivers.sort(Comparator.comparing(Driver::getName));
+            break;
+        case "licenseid":
+            drivers.sort(Comparator.comparing(Driver::getLicenseId));
+            break;
+        default:
+            drivers.sort(Comparator.comparing(Driver::getId));
+    }
+    return drivers;
+}
 
   public List<Driver> getByNameContaining(String name) {
     return driverRepository.findByNameContaining(name);
@@ -50,7 +72,7 @@ public class DriverService {
   }
 
   public Driver getRandomDriver() {
-    Collection<Driver> drivers = getAll();
+    Collection<Driver> drivers = getAll("id");
     int randomIndex = random.nextInt(drivers.size());
     return drivers.toArray(new Driver[0])[randomIndex];
   }

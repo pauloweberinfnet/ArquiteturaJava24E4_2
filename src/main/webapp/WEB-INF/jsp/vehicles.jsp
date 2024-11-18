@@ -48,7 +48,7 @@
       </div>
 
       <script>
-        fetch('/api/vehicles')
+        fetch('/api'+location.pathname+location.search)
             .then(response => response.json())
             .then(vehicles => {
                 const vehiclesBody = document.getElementById('vehiclesBody');
@@ -68,7 +68,6 @@
                     '<td>' + batteryCapacityOrFuelType + '</td>' +
                     '<td>' + batteryLevelOrFuelLevel.toLocaleString('pt-BR') + '</td>' +
                     '<td>' + batteryHealthOrTankCapacity.toLocaleString('pt-BR') + '</td>';
-                    console.log(row);
                     vehiclesBody.appendChild(row);
                 });
             })

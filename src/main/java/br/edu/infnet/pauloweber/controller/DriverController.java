@@ -28,8 +28,8 @@ public class DriverController {
     private DriverService driverService;
 
     @GetMapping
-    public ResponseEntity<Collection<Driver>> getAllDrivers() {
-        return ResponseEntity.ok(driverService.getAll());
+    public ResponseEntity<Collection<Driver>> getAllDrivers(@RequestParam(required = false, defaultValue = "id") String sort) {
+        return ResponseEntity.ok(driverService.getAll(sort));
     }
 
     @GetMapping("/{id}")

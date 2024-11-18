@@ -36,19 +36,22 @@ public class AppController {
 
   @GetMapping(value = "/drivers")
   public String driver(Model model) {
-    model.addAttribute("drivers", driverService.getAll());
+    // Comentado pois a página usa a API REST
+    //model.addAttribute("drivers", driverService.getAll());
     return "drivers";
   }
 
   @GetMapping(value = "/vehicles")
   public String vehicle(Model model) {
-    model.addAttribute("vehicles", vehicleService.getAll());
+    // Comentado pois a página usa a API REST
+    //model.addAttribute("vehicles", vehicleService.getAll());
     return "vehicles";
   }
 
   @GetMapping(value = "/vehicles/combustion")
   public String combustion(Model model) {
-    model.addAttribute("vehicles", combustionService.getAll());
+    // Comentado pois a página usa a API REST
+    //model.addAttribute("vehicles", combustionService.getAll());
     return "vehicles";
   }
   @GetMapping(value = "/vehicles/eletric")
@@ -59,7 +62,8 @@ public class AppController {
 
   @GetMapping(value = "/trips")
   public String trip(Model model) {
-    model.addAttribute("trips", tripService.getAll());
+    // Comentado pois a página usa a API REST
+    //model.addAttribute("trips", tripService.getAll());
     return "trips";
   }
 

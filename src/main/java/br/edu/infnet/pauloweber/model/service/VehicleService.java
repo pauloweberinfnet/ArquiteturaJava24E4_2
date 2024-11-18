@@ -1,6 +1,8 @@
 package br.edu.infnet.pauloweber.model.service;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 import  java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +22,34 @@ public class VehicleService {
 
   private static final Random random = new Random();
 
-  public Collection<Vehicle> getAll() {
-    return (Collection<Vehicle>) vehicleRepository.findAll();
+  public Collection<Vehicle> getAll(String sort) {
+    List<Vehicle> vehicles = (List<Vehicle>) vehicleRepository.findAll();
+
+    if (vehicles.isEmpty() || sort == null) {
+      return vehicles;
+    }
+
+    switch (sort.toLowerCase()) {
+        case "licensePlate":
+            vehicles.sort(Comparator.comparing(Vehicle::getLicensePlate));
+            break;
+        case "brand":
+            vehicles.sort(Comparator.comparing(Vehicle::getBrand));
+            break;
+        case "model":
+            vehicles.sort(Comparator.comparing(Vehicle::getModel));
+            break;
+        case "modelYear":
+            vehicles.sort(Comparator.comparing(Vehicle::getModelYear));
+            break;
+        case "odometer":
+            vehicles.sort(Comparator.comparing(Vehicle::getOdometer));
+            break;
+        default:
+            vehicles.sort(Comparator.comparing(Vehicle::getId));
+    }
+
+    return vehicles;
   }
 
   public Collection<Vehicle> getByLicensePlate(String licensePlate) {
@@ -41,7 +69,7 @@ public class VehicleService {
   }
 
   public Vehicle getRandomVehicle() {
-    Collection<Vehicle> vehicles = getAll();
+    Collection<Vehicle> vehicles = getAll("id");
     int randomIndex = random.nextInt(vehicles.size());
     return vehicles.toArray(new Vehicle[0])[randomIndex];
   }

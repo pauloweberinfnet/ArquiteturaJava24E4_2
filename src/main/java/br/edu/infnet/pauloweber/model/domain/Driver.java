@@ -3,7 +3,7 @@ package br.edu.infnet.pauloweber.model.domain;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -35,9 +35,10 @@ public class Driver {
 	@Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
 	private String name;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+/* 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "driverId")
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	private List<Trip> trips;
 
 	public List<Trip> getTrips() {
@@ -45,7 +46,7 @@ public class Driver {
 	}
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
-	}
+	} */
 	public Driver() {
 		super();
 	}

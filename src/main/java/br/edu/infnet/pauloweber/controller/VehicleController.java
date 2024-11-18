@@ -22,8 +22,8 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping
-    public Collection<Vehicle> getAll() {
-        return vehicleService.getAll();
+    public Collection<Vehicle> getAll(String sort) {
+        return vehicleService.getAll(sort);
     }
 
     @GetMapping("/{id}")

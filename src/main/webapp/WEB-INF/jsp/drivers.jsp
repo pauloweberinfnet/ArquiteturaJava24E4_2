@@ -31,7 +31,7 @@
 
         </div>
         <script>
-          fetch('/api/drivers')
+          fetch('/api'+location.pathname+location.search)
               .then(response => response.json())
               .then(drivers => {
                   const driversBody = document.getElementById('driversBody');

@@ -1,6 +1,8 @@
 package br.edu.infnet.pauloweber.model.service;
 
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,34 @@ public class TripService {
     return tripRepository.count();
   }
 
-  public Collection<Trip> getAll() {
-    return (Collection<Trip>) tripRepository.findAll();
-  }
+  public Collection<Trip> getAll(String sort) {
+    List<Trip> trips = (List<Trip>) tripRepository.findAll();
+    if (trips.isEmpty() || sort == null) {
+        return trips;
+    }
+
+    switch (sort.toLowerCase()) {
+        case "distance":
+            trips.sort(Comparator.comparing(Trip::getDistance));
+            break;
+        case "starttime":
+            trips.sort(Comparator.comparing(Trip::getStartTime));
+            break;
+        case "endtime":
+            trips.sort(Comparator.comparing(Trip::getEndTime));
+            break;
+        case "averagespeed":
+            trips.sort(Comparator.comparing(Trip::getAverageSpeed));
+            break;
+        case "averageconsumption":
+            trips.sort(Comparator.comparing(Trip::getAverageConsumption));
+            break;
+        default:
+            trips.sort(Comparator.comparing(Trip::getId));
+    }
+    return trips;
+}
+
 
   public Trip getById(Integer id) {
     return tripRepository.findById(id).orElse(null);

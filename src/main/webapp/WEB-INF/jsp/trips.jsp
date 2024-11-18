@@ -41,7 +41,7 @@
 </div>
 
 <script>
-    fetch('/api/trips')
+    fetch('/api'+location.pathname+location.search)
         .then(response => response.json())
         .then(trips => {
             const tripsBody = document.getElementById('tripsBody');
