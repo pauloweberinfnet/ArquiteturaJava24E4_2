@@ -56,7 +56,8 @@ public class AppController {
   }
   @GetMapping(value = "/vehicles/eletric")
   public String eletric(Model model) {
-    model.addAttribute("vehicles", eletricService.getAll());
+    // Comentado pois a página usa a API REST
+    //model.addAttribute("vehicles", eletricService.getAll());
     return "vehicles";
   }
 
