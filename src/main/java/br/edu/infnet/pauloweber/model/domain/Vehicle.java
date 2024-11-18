@@ -51,6 +51,7 @@ public abstract class Vehicle{
 	@Size(min = 4, max = 4, message = "O ano deve ter 4 dígitos.")
 	private int modelYear;
 
+	// Removi a relação com Trip pois não implementei o filtro de viagens por veículo.
   /* @OneToMany(cascade = CascadeType.ALL)
 	@JsonBackReference
 	private List<Trip> trips;

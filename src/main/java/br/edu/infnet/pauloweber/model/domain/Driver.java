@@ -35,6 +35,7 @@ public class Driver {
 	@Size(min = 3, max = 50, message = "O nome deve ter entre 3 e 50 caracteres.")
 	private String name;
 
+// Removi a assoociação com Trip por não ter implementado a listagem de viagens por motorista.
 /* 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
 	@JoinColumn(name = "driverId")
 	//@JsonBackReference

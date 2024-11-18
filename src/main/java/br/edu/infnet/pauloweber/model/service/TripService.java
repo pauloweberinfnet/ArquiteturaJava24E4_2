@@ -64,4 +64,18 @@ public class TripService {
     return tripRepository.findByDriverId(driverId);
   }
 
+  public Collection<Trip> searchAllFields(String query) {
+    try {
+        Float numericValue = Float.parseFloat(query);
+        return tripRepository.findByDistanceOrAverageSpeedOrAverageConsumptionOrStartingOdometerOrEndingOdometerOrStartingFuelLevelOrEndingFuelLevel(
+            numericValue, numericValue, numericValue,
+            numericValue, numericValue,
+            numericValue, numericValue
+        );
+    } catch (NumberFormatException e) {
+        return List.of(); // Return empty list if query isn't numeric
+    }
+}
+
+
 }

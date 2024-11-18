@@ -63,6 +63,10 @@ public class DriverService {
     return driverRepository.findByLicenseId(licenseId);
   }
 
+  public List<Driver> searchAllFields(String query) {
+      return driverRepository.findByNameContainingOrLicenseIdContaining(query, query);
+  }
+
   public long count() {
     return driverRepository.count();
   }

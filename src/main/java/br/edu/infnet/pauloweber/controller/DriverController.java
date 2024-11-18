@@ -38,6 +38,11 @@ public class DriverController {
         return driver != null ? ResponseEntity.ok(driver) : ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/search")
+    public ResponseEntity<List<Driver>> searchDrivers(@RequestParam String query) {
+        return ResponseEntity.ok(driverService.searchAllFields(query));
+    }
+
     @GetMapping("/search/name")
     public ResponseEntity<List<Driver>> getDriversByName(@RequestParam String name) {
         return ResponseEntity.ok(driverService.getByNameContaining(name));

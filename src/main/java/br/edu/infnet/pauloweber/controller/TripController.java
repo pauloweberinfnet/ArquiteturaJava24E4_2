@@ -45,6 +45,12 @@ public class TripController {
         return tripService.getAllByDriverId(driverId);
     }
 
+    @GetMapping("/search")
+    public Collection<Trip> searchTrips(@RequestParam String query) {
+        return tripService.searchAllFields(query);
+    }
+
+
     @Operation(summary = "Create a new trip.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public Trip createTrip(@Valid @RequestBody Trip trip) {

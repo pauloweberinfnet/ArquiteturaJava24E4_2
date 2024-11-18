@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.edu.infnet.pauloweber.model.domain.Vehicle;
@@ -35,6 +36,12 @@ public class VehicleController {
     public Collection<Vehicle> getByLicensePlate(@PathVariable String licensePlate) {
         return vehicleService.getByLicensePlate(licensePlate);
     }
+
+    @GetMapping("/search")
+    public Collection<Vehicle> search(@RequestParam String query) {
+        return vehicleService.searchAllFields(query);
+    }
+
 
     @GetMapping("/random")
     public Vehicle getRandomVehicle() {

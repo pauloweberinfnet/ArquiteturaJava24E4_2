@@ -56,6 +56,22 @@ public class VehicleService {
     return vehicleRepository.findByLicensePlate(licensePlate);
   }
 
+  public Collection<Vehicle> searchAllFields(String query) {
+      try {
+          Integer modelYear = Integer.parseInt(query);
+          Float odometer = Float.parseFloat(query);
+          Boolean archived = Boolean.parseBoolean(query);
+          return vehicleRepository.findByLicensePlateContainingOrBrandContainingOrModelContainingOrModelYearOrOdometerOrArchived(
+              query, query, query, modelYear, odometer, archived
+          );
+      } catch (NumberFormatException e) {
+          return vehicleRepository.findByLicensePlateContainingOrBrandContainingOrModelContainingOrModelYearOrOdometerOrArchived(
+              query, query, query, null, null, null
+          );
+      }
+  }
+
+
   public Vehicle add(Vehicle vehicle) {
     return vehicleRepository.save(vehicle);
   }

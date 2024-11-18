@@ -11,4 +11,13 @@ import br.edu.infnet.pauloweber.model.domain.Vehicle;
 public interface VehicleRepository extends CrudRepository<Vehicle, Integer> {
 
   Collection<Vehicle> findByLicensePlate(String licensePlate);
+
+  Collection<Vehicle> findByLicensePlateContainingOrBrandContainingOrModelContainingOrModelYearOrOdometerOrArchived(
+      String licensePlate,
+      String brand,
+      String model,
+      Integer modelYear,
+      Float odometer,
+      Boolean archived
+  );
 }
